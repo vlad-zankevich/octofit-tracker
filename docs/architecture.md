@@ -32,7 +32,7 @@ Record your plan here before editing code.
 
 - Presentation tier decision: Use React components with getJson from the shared client, handle loading/error/empty states, and render real data from the API.
 - Logic tier decision: Implement createActivity, createTeam, getLeaderboard, and suggestWorkouts in octofitService.ts with proper 4xx error handling.
-- Data tier decision: Add required validation to Mongoose schemas for User, Team, Activity, and Workout models.
+- Data tier decision: Require complete user, team, activity, and workout fields in Mongoose schemas; seed stable demo records with validated upserts that preserve unrelated data.
 - Activity tracking approach: Validate userId and teamId, compute points and occurredAt on creation, return 4xx for invalid IDs.
 - Team management approach: Require name on create, return 400 if missing, keep submitted name and mascot.
 - Leaderboard approach: Aggregate activity points by team, sort descending, return rank, teamName, and totalPoints.
