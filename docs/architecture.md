@@ -47,3 +47,20 @@ Record the commands you run and what each failure means.
 - Frontend command: `npm test --prefix octofit-tracker/frontend`
 - Backend build command: `npm run build --prefix octofit-tracker/backend`
 - Frontend build command: `npm run build --prefix octofit-tracker/frontend`
+
+## Implementation plan (from Copilot analysis)
+
+### Tier boundaries
+- Presentation: React + Vite (src/components, App.tsx, client.ts)
+- Logic: Express API (src/api.ts, octofitService.ts, app.ts)
+- Data: Mongoose models (models/, seed.ts)
+
+### Current failing tests
+- Backend data: 4 failed (validation schemas missing required fields)
+- Backend API: 4 failed (501 / empty implementations)
+- Frontend: 15 failed (UI stubs)
+
+### Smallest safe implementation order
+1. Data tier — add required validation to Mongoose models
+2. Logic tier — implement createActivity, createTeam, getLeaderboard, suggestWorkouts
+3. Presentation tier — replace stubs with real fetching + error/loading states
