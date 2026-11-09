@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+import { getJson } from '../api/client.js';
 import { useApiData } from '../hooks/useApiData.js';
 
 type Activity = {
@@ -11,7 +13,8 @@ type Activity = {
 type ActivitiesResponse = { activities: Activity[] };
 
 export default function Activities() {
-  const result = useApiData<ActivitiesResponse>('/api/activities');
+  const loadActivities = useCallback(() => getJson<ActivitiesResponse>('/api/activities'), []);
+  const result = useApiData(loadActivities);
 
   return (
     <section aria-labelledby="activities-heading">

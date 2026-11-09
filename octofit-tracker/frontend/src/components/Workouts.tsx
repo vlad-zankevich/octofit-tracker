@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+import { getJson } from '../api/client.js';
 import { useApiData } from '../hooks/useApiData.js';
 
 type Workout = {
@@ -12,7 +14,11 @@ type Workout = {
 type WorkoutsResponse = { suggestions: Workout[] };
 
 export default function Workouts() {
-  const result = useApiData<WorkoutsResponse>('/api/workouts/suggestions/mona%40example.com');
+  const loadWorkouts = useCallback(
+    () => getJson<WorkoutsResponse>('/api/workouts/suggestions/mona%40example.com'),
+    [],
+  );
+  const result = useApiData(loadWorkouts);
 
   return (
     <section aria-labelledby="workouts-heading">

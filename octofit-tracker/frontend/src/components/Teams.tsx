@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+import { getJson } from '../api/client.js';
 import { useApiData } from '../hooks/useApiData.js';
 
 type Team = {
@@ -10,7 +12,8 @@ type Team = {
 type TeamsResponse = { teams: Team[] };
 
 export default function Teams() {
-  const result = useApiData<TeamsResponse>('/api/teams');
+  const loadTeams = useCallback(() => getJson<TeamsResponse>('/api/teams'), []);
+  const result = useApiData(loadTeams);
 
   return (
     <section aria-labelledby="teams-heading">
